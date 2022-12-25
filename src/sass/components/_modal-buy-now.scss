@@ -31,10 +31,16 @@
   visibility: visible;
 }
 
+.noScroll {
+  overflow: hidden;
+}
+
 /*  Установаем ширину окна  */
 .bn-modal {
   width: 280px;
   padding: 28px;
+  max-height: 90vh;
+  overflow: auto;
 
   background: var(--main-text-color);
   border: 2px solid var(--accent-color);
@@ -43,8 +49,13 @@
   position: fixed;
   top: 50%;
   left: 50%;
-  transform: translate(-50%, -50%);
+
   z-index: 30;
+  transform: translate(-50%, -70%);
+  &.active {
+    transform: translate(-50%, -50%);
+    @include transition(opacity, transform);
+  }
 
   // tablet screen
   @media screen and (min-width: 768px) {
@@ -250,7 +261,6 @@
   height: 24px;
   border: none;
   background-color: var(--main-text-color);
-  // border: 1px solid rgba(0, 0, 0, 0.1);
   cursor: pointer;
 
   &:hover .bn-modal__close-icon,
@@ -264,7 +274,7 @@
   height: 20px;
 
   fill: var(--secondary-text-color);
-  transition: fill var(--transition-duration-timing);
+  @include transition(fill);
 
   @media screen and (min-width: 768px) {
     width: 24px;
